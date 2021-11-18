@@ -174,7 +174,6 @@ def _generate_nvidia(config, bus_ids, xorg_extra):
     text += "Section \"Device\"\n" \
             "\tIdentifier \"integrated\"\n" \
             "\tDriver \"modesetting\"\n"
-    text += "\tBusID \"%s\"\n" % bus_ids[integrated_gpu]
     for line in xorg_extra_integrated:
         text += ("\t" + line + "\n")
     text += "EndSection\n\n"
@@ -259,7 +258,6 @@ def _make_nvidia_device_section(config, bus_ids, xorg_extra_lines):
     text = "Section \"Device\"\n" \
            "\tIdentifier \"nvidia\"\n" \
            "\tDriver \"nvidia\"\n"
-    text += "\tBusID \"%s\"\n" % bus_ids["nvidia"]
     if "overclocking" in options:
         text += "\tOption \"Coolbits\" \"28\"\n"
     if "triple_buffer" in options:
@@ -287,7 +285,6 @@ def _make_intel_device_section(config, bus_ids, xorg_extra_lines):
     text = "Section \"Device\"\n" \
            "\tIdentifier \"integrated\"\n"
     text += "\tDriver \"%s\"\n" % driver
-    text += "\tBusID \"%s\"\n" % bus_ids["intel"]
     if config["intel"]["accel"] != "":
         text += "\tOption \"AccelMethod\" \"%s\"\n" % config["intel"]["accel"]
     if config["intel"]["tearfree"] != "":
